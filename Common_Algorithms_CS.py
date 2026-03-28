@@ -134,8 +134,48 @@ def quickSort(inputList, startIndex, endIndex):                     # startIndex
 
     return inputList                                                # After all valid recursions, end the program as the list is sorted
 
-def bubbleSort():
-    pass
+def bubbleSort(inputList):
 
-def insertionSort():
-    pass
+    passes = 0                                                  # Will be used to limit the scope of the sort after passes
+                                                                # Recall that a pass brings the largest unsorted number to the right
+
+    while True:                                                 # Loop for each pass
+
+        swapOccurred = False                                    # Used to end a sort early
+                                                                # Recall that a list is sorted if no swaps occur
+
+        for i in range(0, len(inputList) - passes - 1):         # Loop for each pair...
+                                                                # ...excluding the final number (no pair)...
+                                                                # ...and sorted numbers from previous passes...
+
+            if inputList[i] > inputList[i+1]:                   # If a pair is unsorted...
+
+                temp = inputList[i]                             # ...swap them around (using a temporary variable)...
+                inputList[i] = inputList[i+1]
+                inputList[i+1] = temp
+
+                swapOccurred = True                             # ...and mark that a swap has happened
+
+        passes += 1                                             # Increment the number of passes
+
+        if not swapOccurred:                                    # If no swaps happened...
+            break                                               # ...stop looping...
+
+    return inputList                                            # ...and output the sorted list
+
+def insertionSort(inputList):
+    
+    for i in range(0, len(inputList)):                              # Loop through all items in the list
+
+        item = inputList[i]                                         # Save the item to be added to the sorted portion
+        position = i                                                # Used for moving the item right
+
+        while position > 0 and inputList[position - 1] > item:      # While the start of the list hasn't been reached...
+                                                                    # ...or we haven't found an item ours is smaller than...
+
+            inputList[position] = inputList[position - 1]           # ...move the previous item forward one, making room for our item
+            position -= 1                                           # Adjust the position such that the condition can be checked again
+
+        inputList[position] = item                                  # Once we found the spot, set its value to our item
+
+    return inputList                                                # Once all items have been moved to the sorted portion, return the list
