@@ -6,3 +6,4 @@ Algorithms included:
 - Linear search
 - Binary search
 - Merge sort
+- Quicksort
