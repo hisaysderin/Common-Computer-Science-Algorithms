@@ -40,6 +40,8 @@ def binarySearch(inputList, searchedItem):
 
 def mergeSort(inputList):
     
+    print(inputList)
+
     if len(inputList) > 1:                          # Stop recursively dividing when the lists are size 1
 
         middle = len(inputList) // 2                # Get the middle of the list
@@ -92,5 +94,45 @@ def mergeSort(inputList):
     return inputList
 
 
-def quickSort(inputList):
-    pass
+def quickSort(inputList, startIndex, endIndex):                     # startIndex and endIndex determine the scope of the recursion
+                                                                    # As that start, startIndex = 0 and endIndex = length of the list - 1
+
+    if startIndex >= endIndex:                                      # If the scope is 0 or under (i.e. recursion should stop)...
+        return                                                      # ...return nothing and go back to the previous recursion
+
+    else:
+        pivot = inputList[startIndex]                               # Set the pivot to the first item in the list (rule can be changed)
+        leftPointer = startIndex + 1                                # Create the left and right pointers
+        rightPointer = endIndex
+
+        doneSplitting = False                                       # Used to loop until we have sorted around the pivot
+
+        while not doneSplitting:
+
+            while leftPointer <= rightPointer and inputList[leftPointer] <= pivot:
+                leftPointer += 1                                    # Move the left pointer right until it finds an item larger than the pivot...
+                                                                    # ...or it has passed the right pointer
+
+            while rightPointer >= leftPointer and inputList[rightPointer] >= pivot:
+                rightPointer -= 1                                   # Move the right pointer left until it finds an item smaller than the pivot...
+                                                                    # ...or it has passed the left pointer
+
+            if leftPointer < rightPointer:                          # If the pointers have not crossed yet...
+                temp = inputList[leftPointer]                       # Swap the left and right pointer values (using a temporary variable)
+                inputList[leftPointer] = inputList[rightPointer]
+                inputList[rightPointer] = temp
+
+            else:                                                   # If the pointers have crossed...
+                doneSplitting = True                                # ...stop looping...
+
+        temp = inputList[startIndex]                                # ...and swap the pivot and right pointer value (using a temporary variable)
+        inputList[startIndex] = inputList[rightPointer]
+        inputList[rightPointer] = temp
+
+        quickSort(inputList, startIndex, rightPointer-1)            # Perform the same algorithm on the two halves of the list
+        quickSort(inputList, rightPointer+1, endIndex)
+
+    return inputList                                                # After all valid recursions, end the program as the list is sorted 
+
+#print(quickSort([10, 7, 32, 87, 100, 1, 2, 20, 6, 67], 0, 9))
+print(mergeSort([5, 4, 3, 2, 1]))
