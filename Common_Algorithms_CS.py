@@ -95,7 +95,7 @@ def mergeSort(inputList):
 
 
 def quickSort(inputList, startIndex, endIndex):                     # startIndex and endIndex determine the scope of the recursion
-                                                                    # As that start, startIndex = 0 and endIndex = length of the list - 1
+                                                                    # At the start, startIndex = 0 and endIndex = length of the list - 1
 
     if startIndex >= endIndex:                                      # If the scope is 0 or under (i.e. recursion should stop)...
         return                                                      # ...return nothing and go back to the previous recursion
@@ -132,7 +132,10 @@ def quickSort(inputList, startIndex, endIndex):                     # startIndex
         quickSort(inputList, startIndex, rightPointer-1)            # Perform the same algorithm on the two halves of the list
         quickSort(inputList, rightPointer+1, endIndex)
 
-    return inputList                                                # After all valid recursions, end the program as the list is sorted 
+    return inputList                                                # After all valid recursions, end the program as the list is sorted
 
-#print(quickSort([10, 7, 32, 87, 100, 1, 2, 20, 6, 67], 0, 9))
-print(mergeSort([5, 4, 3, 2, 1]))
+def bubbleSort():
+    pass
+
+def insertionSort():
+    pass
